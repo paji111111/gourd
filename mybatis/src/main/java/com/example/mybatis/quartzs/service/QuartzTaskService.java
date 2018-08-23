@@ -1,23 +1,24 @@
-package com.example.mybatis.quartzs.conf;
+package com.example.mybatis.quartzs.service;
 
 import com.example.mybatis.quartzs.job.JobTask;
 import com.example.mybatis.quartzs.job.JobTaskWorkFlow;
 import com.example.mybatis.quartzs.job.MyTest;
+import com.example.mybatis.quartzs.job.MyTestParams;
+import org.apache.commons.collections4.MapUtils;
 import org.quartz.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 /**
  * Created by liuzhixin on 2018/8/22.
  */
-@Component
-public class QuartzTaskUtil {
+@Service
+public class QuartzTaskService {
 
     @Autowired
-    QuartzConfigTask quartzConfigTask;
-
-    @Qualifier("scheduler")
     private Scheduler scheduler;
 
     private JobTaskWorkFlow createJobTaskWorkFlow(){
@@ -33,7 +34,16 @@ public class QuartzTaskUtil {
         JobTask jobTask = new JobTask();
         jobTask.setId(i);
         jobTask.setName("task"+i);
-        jobTask.setJobClass(MyTest.class.getName());
+
+        if (i % 2 == 0 ) {
+            jobTask.setJobClass(MyTestParams.class.getName());
+            jobTask.getParamMap().put("a", 1);
+            jobTask.getParamMap().put("b", "b");
+            jobTask.getParamMap().put("c", 100L);
+        }else{
+            jobTask.setJobClass(MyTest.class.getName());
+        }
+
         jobTask.setCron(cron);
         jobTask.setJobTaskWorkFlow(createJobTaskWorkFlow());
 
@@ -62,6 +72,9 @@ public class QuartzTaskUtil {
                         .build();
                 jobDetail.getJobDataMap().put("jobName", jobName);
                 jobDetail.getJobDataMap().put("jobGroup", jobGroup);
+                if (MapUtils.isNotEmpty(jobTask.getParamMap())){
+                    jobDetail.getJobDataMap().putAll(jobTask.getParamMap());
+                }
                 CronScheduleBuilder cronScheduleBuilder = CronScheduleBuilder.cronSchedule(jobTask.getCron());
                 /*withMisfireHandlingInstructionDoNothing
                 ——不触发立即执行

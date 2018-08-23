@@ -1,7 +1,6 @@
 package com.example.mybatis.quartzs.conf;
 
 import com.example.mybatis.quartzs.job.MyTest;
-import com.example.mybatis.quartzs.job.MyTest1;
 import org.quartz.*;
 import org.quartz.ee.servlet.QuartzInitializerListener;
 import org.springframework.context.annotation.Bean;
@@ -12,11 +11,11 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 
 
-@Configuration
 @Component
+@Configuration
 public class QuartzConfigTask {
 
-    @Bean(name = "SchedulerFactory")
+    @Bean
     public SchedulerFactoryBean schedulerFactoryBean() throws IOException {
         SchedulerFactoryBean factory = new SchedulerFactoryBean();
         //用于quartz集群,QuartzScheduler 启动时更新己存在的Job，这样就不用每次修改targetObject后删除qrtz_job_details表对应记录了
@@ -42,12 +41,11 @@ public class QuartzConfigTask {
     /*
   * 通过SchedulerFactoryBean获取Scheduler的实例
   */
-    @Bean(name = "Scheduler")
+    @Bean
     public Scheduler scheduler() throws IOException {
         Scheduler scheduler = schedulerFactoryBean().getScheduler();
         //添加同步任务 	author:sujin
-        addmyTestJob(scheduler);
-        addmyTestJob1(scheduler);
+//        addmyTestJob(scheduler);
         return scheduler;
     }
 
@@ -70,20 +68,6 @@ public class QuartzConfigTask {
             deleteCommonJob(jobName, jobGroup, scheduler);
         }
     }
-
-    private void addmyTestJob1(Scheduler scheduler) {
-        String startJob = "true";//是否开始
-        String jobName = "DATAMART_SYNC_1";
-        String jobGroup = "DATAMART_SYNC_1";
-        String cron = "0 0/1 * * * ?";//定时的时间设置
-        String className = MyTest1.class.getName();
-        if (startJob != null && startJob.equals("true")) {
-            addCommonCronJob(jobName, jobGroup, cron, scheduler, className);
-        } else {
-            deleteCommonJob(jobName, jobGroup, scheduler);
-        }
-    }
-
     //end...
 
     private void deleteCommonJob(String jobName, String jobGroup, Scheduler scheduler) {

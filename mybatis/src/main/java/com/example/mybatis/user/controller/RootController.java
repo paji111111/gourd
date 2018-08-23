@@ -1,7 +1,7 @@
 package com.example.mybatis.user.controller;
 
 
-import com.example.mybatis.quartzs.conf.QuartzTaskUtil;
+import com.example.mybatis.quartzs.service.QuartzTaskService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ public class RootController {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    QuartzTaskUtil quartzTaskUtil;
+    QuartzTaskService quartzTaskService;
 
     @RequestMapping
     public String index() {
@@ -27,7 +27,7 @@ public class RootController {
         logger.info("-----------------------");
 
 
-        quartzTaskUtil.addmyTestJob(Fac.atomicLong.getAndIncrement());
+        quartzTaskService.addmyTestJob(Fac.atomicLong.getAndIncrement());
 
         return "SUCCESS";
     }

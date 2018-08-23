@@ -1,13 +1,19 @@
 package com.example.mybatis.quartzs.job;
 
 import org.quartz.Job;
+import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
-public class MyTest1 implements Job {
+public class MyTestParams implements Job {
 
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-        System.out.println("test_1");
+
+
+        JobDataMap jobDataMap = jobExecutionContext.getJobDetail().getJobDataMap();
+
+        System.out.println("MyTestParams execute params :  "+jobDataMap);
+
     }
 }

@@ -1,6 +1,9 @@
 package com.example.mybatis.quartzs.job;
 
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class JobTask {
     private Long id;
     private String name;
@@ -8,6 +11,8 @@ public class JobTask {
     private String jobClass;
     private JobTaskWorkFlow jobTaskWorkFlow;
     private Integer status;
+
+    private Map<String, Object> paramMap = new HashMap<>();
 
     public Long getId() {
         return id;
@@ -55,5 +60,13 @@ public class JobTask {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public Map<String, Object> getParamMap() {
+        return paramMap;
+    }
+
+    public void setParamMap(Map<String, Object> paramMap) {
+        this.paramMap = paramMap;
     }
 }
