@@ -1,4 +1,4 @@
-package com.example.mybatis.quartzs.conf;
+package com.example.mybatis.quartz.conf;
 
 
 import org.quartz.*;

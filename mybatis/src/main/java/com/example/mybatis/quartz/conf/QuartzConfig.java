@@ -1,6 +1,6 @@
-package com.example.mybatis.quartzs.conf;
+package com.example.mybatis.quartz.conf;
 
-import com.example.mybatis.quartzs.job.MyTest;
+import com.example.mybatis.quartz.job.MyTest;
 import org.quartz.*;
 import org.quartz.ee.servlet.QuartzInitializerListener;
 import org.springframework.context.annotation.Bean;
@@ -13,7 +13,7 @@ import java.io.IOException;
 
 @Component
 @Configuration
-public class QuartzConfigTask {
+public class QuartzConfig {
 
     @Bean
     public SchedulerFactoryBean schedulerFactoryBean() throws IOException {

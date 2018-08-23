@@ -1,7 +1,7 @@
 package com.example.mybatis.user.controller;
 
 
-import com.example.mybatis.quartzs.service.QuartzTaskService;
+import com.example.mybatis.quartz.service.QuartzTaskService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

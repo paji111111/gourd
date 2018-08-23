@@ -1,4 +1,4 @@
-package com.example.mybatis.quartzs.job;
+package com.example.mybatis.quartz.job;
 
 import org.quartz.Job;
 import org.quartz.JobDataMap;

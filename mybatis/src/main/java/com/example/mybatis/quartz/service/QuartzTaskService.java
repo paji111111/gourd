@@ -1,16 +1,13 @@
-package com.example.mybatis.quartzs.service;
+package com.example.mybatis.quartz.service;
 
-import com.example.mybatis.quartzs.job.JobTask;
-import com.example.mybatis.quartzs.job.JobTaskWorkFlow;
-import com.example.mybatis.quartzs.job.MyTest;
-import com.example.mybatis.quartzs.job.MyTestParams;
+import com.example.mybatis.quartz.job.JobTask;
+import com.example.mybatis.quartz.job.JobTaskWorkFlow;
+import com.example.mybatis.quartz.job.MyTest;
+import com.example.mybatis.quartz.job.MyTestParams;
 import org.apache.commons.collections4.MapUtils;
 import org.quartz.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 
 /**
  * Created by liuzhixin on 2018/8/22.

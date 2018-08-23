@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mybatis.quartz.db.dao.JobParamsDbDao">
+    <resultMap id="BaseResultMap" type="com.example.mybatis.quartz.db.JobParamsDb">
+        <id column="id" property="id"/>
+        <result property="name" column="name"/>
+        <result property="jobDefineId" column="job_define_id"/>
+        <result property="status" column="status"/>
+        <result property="created" column="created"/>
+        <result property="deleted" column="deleted"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, `name`,job_define_id, status, created, deleted
+    </sql>
+
+    <select id="selectBySelective" resultMap="BaseResultMap" parameterType="com.example.mybatis.quartz.db.JobParamsDb">
+        select <include refid="Base_Column_List"/>
+        from job_params
+        <where>
+            <if test="id != null">
+                id = #{id}
+            </if>
+            <if test="name != null">
+                and `name` like '%#{name}%'
+            </if>
+            <if test="jobDefineId != null">
+                and job_define_id = #{jobDefineId}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="deleted != null">
+                and deleted = #{deleted}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Long">
+        select <include refid="Base_Column_List"/>
+        from job_params
+        where id = #{id}
+    </select>
+
+    <insert id="insert" parameterType="com.example.mybatis.quartz.db.JobParamsDb" keyProperty="id" useGeneratedKeys="true">
+        INSERT into job_params(id, `name`,job_define_id, status, created, deleted)
+        VALUES (#{id}, #{name}, #{jobDefineId}, #{status}, #{created}, #{deleted})
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.example.mybatis.quartz.db.JobParamsDb">
+        update job_params
+        <set>
+            <if test="name != null">
+                `name` = #{name},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="deleted != null">
+                deleted = #{deleted}
+            </if>
+        </set>
+        WHERE  id = #{id}
+    </update>
+
+</mapper>
