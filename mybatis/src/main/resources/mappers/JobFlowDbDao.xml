@@ -9,7 +9,7 @@
         <result property="deleted" column="deleted"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, `name`, status, created, deleted
+        id, `name`, status, created, deleted, description
     </sql>
 
     <select id="selectBySelective" resultMap="BaseResultMap" parameterType="com.example.mybatis.quartz.db.JobFlowDb">
@@ -38,8 +38,8 @@
     </select>
 
     <insert id="insert" parameterType="com.example.mybatis.quartz.db.JobFlowDb" keyProperty="id" useGeneratedKeys="true">
-        INSERT into job_flow(id, `name`, status, created, deleted)
-        VALUES (#{id}, #{name}, #{status}, #{created}, #{deleted})
+        INSERT into job_flow(id, `name`, status, created, deleted, description)
+        VALUES (#{id}, #{name}, #{status}, #{created}, #{deleted}, #{description})
     </insert>
 
     <update id="updateByPrimaryKeySelective" parameterType="com.example.mybatis.quartz.db.JobFlowDb">
@@ -52,7 +52,10 @@
                 status = #{status},
             </if>
             <if test="deleted != null">
-                deleted = #{deleted}
+                deleted = #{deleted},
+            </if>
+            <if test="description != null">
+                description = #{description}
             </if>
         </set>
         WHERE  id = #{id}

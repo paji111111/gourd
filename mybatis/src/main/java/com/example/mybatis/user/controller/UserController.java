@@ -35,4 +35,16 @@ public class UserController {
         service.createUser(userModel);
         return "SUCCESS";
     }
+
+    @RequestMapping("/get")
+    public User createUser(Long userId) {
+        logger.info(" ================== ");
+        User userModel = new User();
+        userModel.setPassword("password");
+        userModel.setPhone("12345678900");
+        userModel.setUserName("作者");
+        service.createUser(userModel);
+        return userModel;
+    }
+
 }

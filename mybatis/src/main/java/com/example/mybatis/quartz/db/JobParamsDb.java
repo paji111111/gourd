@@ -10,6 +10,7 @@ public class JobParamsDb {
     private Integer status;
     private Long created;
     private Integer deleted;    // 删除标记
+    private String description;
 
     public Long getId() {
         return id;
@@ -57,5 +58,13 @@ public class JobParamsDb {
 
     public void setDeleted(Integer deleted) {
         this.deleted = deleted;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

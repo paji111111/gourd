@@ -7,17 +7,19 @@ import java.util.List;
  */
 public class AddTaskRequest {
 
-    private String taskName;
+    private String name;
     private String cron;
+    private Long jobFlowId;
     private String jobClassName;
     private List<String> paramNames;
+    private String description;
 
-    public String getTaskName() {
-        return taskName;
+    public String getName() {
+        return name;
     }
 
-    public void setTaskName(String taskName) {
-        this.taskName = taskName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getCron() {
@@ -26,6 +28,14 @@ public class AddTaskRequest {
 
     public void setCron(String cron) {
         this.cron = cron;
+    }
+
+    public Long getJobFlowId() {
+        return jobFlowId;
+    }
+
+    public void setJobFlowId(Long jobFlowId) {
+        this.jobFlowId = jobFlowId;
     }
 
     public String getJobClassName() {
@@ -42,5 +52,25 @@ public class AddTaskRequest {
 
     public void setParamNames(List<String> paramNames) {
         this.paramNames = paramNames;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "AddTaskRequest{" +
+                "name='" + name + '\'' +
+                ", cron='" + cron + '\'' +
+                ", jobFlowId=" + jobFlowId +
+                ", jobClassName='" + jobClassName + '\'' +
+                ", paramNames=" + paramNames +
+                ", description='" + description + '\'' +
+                '}';
     }
 }

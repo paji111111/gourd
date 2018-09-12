@@ -10,6 +10,7 @@ public class JobFlowDb {
     private Integer status;
     private Integer deleted;
     private Long created;
+    private String description;
 
     public Long getId() {
         return id;
@@ -49,5 +50,13 @@ public class JobFlowDb {
 
     public void setCreated(Long created) {
         this.created = created;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

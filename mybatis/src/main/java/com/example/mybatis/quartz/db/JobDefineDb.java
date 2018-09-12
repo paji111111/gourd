@@ -12,6 +12,8 @@ public class JobDefineDb {
     private String cron;    // 规定执行时间
     private Long created;   // 创建时间
     private Integer deleted;    // 删除标记
+    private String description; // 描述
+    private String jobClassName;
 
     public Long getId() {
         return id;
@@ -75,5 +77,21 @@ public class JobDefineDb {
 
     public void setDeleted(Integer deleted) {
         this.deleted = deleted;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getJobClassName() {
+        return jobClassName;
+    }
+
+    public void setJobClassName(String jobClassName) {
+        this.jobClassName = jobClassName;
     }
 }

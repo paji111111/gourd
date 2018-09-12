@@ -10,9 +10,10 @@
         <result property="cron" column="cron"/>
         <result property="created" column="created"/>
         <result property="deleted" column="deleted"/>
+        <result property="jobClassName" column="job_class_name"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, `name`, job_flow_id, sn, status, cron, created, deleted
+        id, `name`, job_flow_id, sn, status, cron, created, deleted, description, job_class_name
     </sql>
 
     <select id="selectBySelective" resultMap="BaseResultMap" parameterType="com.example.mybatis.quartz.db.JobDefineDb">
@@ -37,6 +38,9 @@
             <if test="deleted != null">
                 and deleted = #{deleted}
             </if>
+            <if test=" description != null">
+                and description = #{description}
+            </if>
         </where>
     </select>
 
@@ -47,8 +51,8 @@
     </select>
 
     <insert id="insert" parameterType="com.example.mybatis.quartz.db.JobDefineDb" keyProperty="id" useGeneratedKeys="true">
-        INSERT into job_define(id, `name`, job_flow_id, sn, status, cron, created, deleted)
-        VALUES (#{id}, #{name}, #{jobFlowId}, #{sn}, #{status}, #{cron}, #{created}, #{deleted})
+        INSERT into job_define(id, `name`, job_flow_id, sn, status, cron, created, deleted, description, job_class_name)
+        VALUES (#{id}, #{name}, #{jobFlowId}, #{sn}, #{status}, #{cron}, #{created}, #{deleted}, #{description}, #{jobClassName})
     </insert>
 
     <update id="updateByPrimaryKeySelective" parameterType="com.example.mybatis.quartz.db.JobDefineDb">
@@ -70,7 +74,10 @@
                 cron = #{cron},
             </if>
             <if test="deleted != null">
-                deleted = #{deleted}
+                deleted = #{deleted},
+            </if>
+            <if test="description != null">
+                description = #{description}
             </if>
         </set>
         WHERE  id = #{id}

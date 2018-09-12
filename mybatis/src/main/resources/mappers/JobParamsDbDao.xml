@@ -10,7 +10,7 @@
         <result property="deleted" column="deleted"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, `name`,job_define_id, status, created, deleted
+        id, `name`,job_define_id, status, created, deleted, description
     </sql>
 
     <select id="selectBySelective" resultMap="BaseResultMap" parameterType="com.example.mybatis.quartz.db.JobParamsDb">
@@ -42,8 +42,8 @@
     </select>
 
     <insert id="insert" parameterType="com.example.mybatis.quartz.db.JobParamsDb" keyProperty="id" useGeneratedKeys="true">
-        INSERT into job_params(id, `name`,job_define_id, status, created, deleted)
-        VALUES (#{id}, #{name}, #{jobDefineId}, #{status}, #{created}, #{deleted})
+        INSERT into job_params(id, `name`,job_define_id, status, created, deleted, description)
+        VALUES (#{id}, #{name}, #{jobDefineId}, #{status}, #{created}, #{deleted}, #{description})
     </insert>
 
     <update id="updateByPrimaryKeySelective" parameterType="com.example.mybatis.quartz.db.JobParamsDb">
@@ -56,7 +56,10 @@
                 status = #{status},
             </if>
             <if test="deleted != null">
-                deleted = #{deleted}
+                deleted = #{deleted},
+            </if>
+            <if test="description != null">
+                description = #{description}
             </if>
         </set>
         WHERE  id = #{id}
